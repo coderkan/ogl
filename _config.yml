@@ -8,9 +8,9 @@ highlighter: rouge
 safe: true
 lsi: false
 source:      .
-languages_iso: [en, zh, ja, ru, fr, kr]
-languages: [en, cn, jp, ru, fr, kr]
-languages_names: [english, chinese, japanese, russian, français, korean]
+languages_iso: [en, zh, ja, ru, fr, kr, tr]
+languages: [en, cn, jp, ru, fr, kr, tr]
+languages_names: [english, chinese, japanese, russian, français, korean, turkish]
 # Build settings
 markdown: kramdown
 kramdown:
