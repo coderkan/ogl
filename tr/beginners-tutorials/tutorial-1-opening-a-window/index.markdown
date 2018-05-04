@@ -13,15 +13,15 @@ tags: []
 * TOC
 {:toc}
 
-# Introduction
+# Giriş
 
-Welcome to the first tutorial !
+İlk eğitime hoş geldiniz!
 
-Before jumping into OpenGL, you will first learn how to build the code that goes with each tutorial, how to run it, and most importantly, how to play with the code yourself.
+OpenGL'e geçmeden önce, her bir eğitimle birlikte gelen kodu nasıl oluşturacağınızı, nasıl çalıştıracağınızı ve en önemlisi kodla kendiniz nasıl oynayacağınızı öğreneceksiniz.
 
-# Prerequisites
+# Ön Koşullar
 
-No special prerequisite is needed to follow these tutorials. Experience with any programming langage ( C, Java, Lisp, Javascript, whatever ) is better to fully understand the code, but not needed; it will merely be more complicated to learn two things at the same time.
+Bu eğitimleri takip edebilmek için özel bir ön koşul bulunmamaktadır. Experience with any programming langage ( C, Java, Lisp, Javascript, whatever ) is better to fully understand the code, but not needed; it will merely be more complicated to learn two things at the same time.
 
 All tutorials are written in "Easy C++" : Lots of effort has been made to make the code as simple as possible. No templates, no classes, no pointers. This way, you will be able to understand everything even if you only know Java.
 
