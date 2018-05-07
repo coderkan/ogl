@@ -23,33 +23,32 @@ OpenGL'e geçmeden önce, her bir eğitimle birlikte gelen kodu nasıl oluştura
 
 Bu eğitimleri takip edebilmek için özel bir ön koşul bulunmamaktadır. Experience with any programming langage ( C, Java, Lisp, Javascript, whatever ) is better to fully understand the code, but not needed; it will merely be more complicated to learn two things at the same time.
 
-All tutorials are written in "Easy C++" : Lots of effort has been made to make the code as simple as possible. No templates, no classes, no pointers. This way, you will be able to understand everything even if you only know Java.
+Bütün eğitimler "Easy C++" ile yazıldı: Kodu mümkün olduğunca basit hale getirmek için çok çaba harcanmıştır. Şablon yok, sınıf yok, pointer yok. Bu şekilde, sadece Java'yı biliyorsanız bile her şeyi anlayabileceksiniz.
 
-# Forget Everything
+# Her Şeyi Unut 
 
-You don't have to know anything, but you have to forget everything you know about OpenGL.
-If you know about something that looks like glBegin(), forget it. Here you will learn modern OpenGL (OpenGL 3 and 4) , and many online tutorials teach "old" OpenGL (OpenGL 1 and 2). So forget everything you might know before your brain melts from the mix.
+Hiçbir şey bilmek zorunda değilsin, ama OpenGL hakkında bildiğin herşeyi unutmalısın. glBegin() gibi bir şeyler biliyorsan, unut gitsin. Burada modern OpenGL (OpenGL 3 ve 4) , ve bir çok online eğitimler "eski" OpenGL (OpenGL 1 ve 2) yi öğretir. Kafanız fazla karışmadan bildiğiniz ne varsa unutun.
 
 # Building the tutorials
 
-All tutorials can be built on Windows, Linux and Mac. For all these platforms, the procedure is roughly the same :
+Bütün eğitimler Windows, Linux ve Mac üzerinde oluşturulabilinir. Bütün platformlar için, prosedür kabaca aynıdır :
 
-* **Update your drivers** !! doooo it. You've been warned.
-* Download a compiler, if you don't already have one.
-* Install CMake
-* Download the source code of the tutorials
-* Generate a project using CMake
-* Build the project using your compiler
-* Play with the samples !
+* **Sürücülerini Güncelle** !! yaaap. Uyarıldın.
+* Bir derleyicin yoksa derleyici indirin.
+* CMake'i kurun
+* Eğitimlerin kaynak kodlarını indirin.
+* CMake kullanarak bir proje oluşturun 
+* Projeyi derleyicinizi kullanarak Build edin
+* Örneklerle oynayın!
 
-Detailed procedures will now be given for each platform. Adaptations may be required. If unsure, read the instruction for Windows and try to adapt them.
+Her platform için detaylı procedürler şimdi verilecektir. Uyarlamalar gerekli olabilir. Emin değilseniz, Windows için talimatları okuyun ve bunları uyarlamaya çalışın.
 
 ## Building on Windows
 
  
 
-* Updating your drivers should be easy. Just go to NVIDIA's or AMD's website and download the drivers. If unsure about your GPU model : Control Panel -> System and Security -> System -> Device Manager -> Display adapter. If you have an integrated Intel GPU, drivers are usually provided by your OEM (Dell, HP, ...).
-* We suggest using Visual Studio 2017 Express for Desktop as a compiler. You can download it for free [here](https://www.visualstudio.com/en-US/products/visual-studio-express-vs). MAKE SURE YOU CHOOSE CUSTOM INSTALLATION AND CHECK C++. If you prefer using MinGW, we recommend using [Qt Creator](http://qt-project.org/). Install whichever you want. Subsequent steps will be explained with Visual Studio, but should be similar with any other IDE.
+* Sürücüleri güncellemek kolay olmalı. NVIDIA' nın ya da AMD' nin web sayfasına gidin ve sürücüleri indirin. Eğer GPU modelinizden emin değilseniz : Control Panel -> System and Security -> System -> Device Manager -> Display adapter. Entegre bir Intel GPU' nuz varsa, sürücüler genellikle OEM(Dell, HP, ...)' niz tarafından sağlanır.
+* Visual Studio 2017 Express' i masaüstü derleyicisi olarak kullanmanızı öneririz. Ücretsiz olarak [buradan](https://www.visualstudio.com/en-US/products/visual-studio-express-vs) indirebilirsiniz.  Özel kurulum seçmenizden ve C++' ı tercih etmiş olmanızdan emin olun. MinGW kullanmayı tercih ederseniz, [Qt Creator](http://qt-project.org/) kullanmanızı öneririz. İstediğinizi yükleyin, Sonraki adımlar Visual Studio ile açıklanacaktır, ancak diğer IDE'lerle benzer olmalıdır.
 * Download [CMake ](http://www.cmake.org/cmake/resources/software.html)from here and install it
 * [Download the source code](http://www.opengl-tutorial.org/download/) and unzip it, for instance in C:\Users\XYZ\Projects\OpenGLTutorials\ .
 * Launch CMake. In the first line, navigate to the unzipped folder. If unsure, choose the folder that contains the CMakeLists.txt file. In the second line, enter where you want all the compiler's stuff to live. For instance, you can choose C:\Users\XYZ\Projects\OpenGLTutorials-build-Visual2017-64bits\, or C:\Users\XYZ\Projects\OpenGLTutorials\build\Visual2017-32bits\. Notice that it can be anywhere, not necessarily in the same folder.
