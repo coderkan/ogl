@@ -49,24 +49,23 @@ Her platform için detaylı procedürler şimdi verilecektir. Uyarlamalar gerekl
 
 * Sürücüleri güncellemek kolay olmalı. NVIDIA' nın ya da AMD' nin web sayfasına gidin ve sürücüleri indirin. Eğer GPU modelinizden emin değilseniz : Control Panel -> System and Security -> System -> Device Manager -> Display adapter. Entegre bir Intel GPU' nuz varsa, sürücüler genellikle OEM(Dell, HP, ...)' niz tarafından sağlanır.
 * Visual Studio 2017 Express' i masaüstü derleyicisi olarak kullanmanızı öneririz. Ücretsiz olarak [buradan](https://www.visualstudio.com/en-US/products/visual-studio-express-vs) indirebilirsiniz.  Özel kurulum seçmenizden ve C++' ı tercih etmiş olmanızdan emin olun. MinGW kullanmayı tercih ederseniz, [Qt Creator](http://qt-project.org/) kullanmanızı öneririz. İstediğinizi yükleyin, Sonraki adımlar Visual Studio ile açıklanacaktır, ancak diğer IDE'lerle benzer olmalıdır.
-* Download [CMake ](http://www.cmake.org/cmake/resources/software.html)from here and install it
-* [Download the source code](http://www.opengl-tutorial.org/download/) and unzip it, for instance in C:\Users\XYZ\Projects\OpenGLTutorials\ .
-* Launch CMake. In the first line, navigate to the unzipped folder. If unsure, choose the folder that contains the CMakeLists.txt file. In the second line, enter where you want all the compiler's stuff to live. For instance, you can choose C:\Users\XYZ\Projects\OpenGLTutorials-build-Visual2017-64bits\, or C:\Users\XYZ\Projects\OpenGLTutorials\build\Visual2017-32bits\. Notice that it can be anywhere, not necessarily in the same folder.
-![]({{site.baseurl}}/assets/images/tuto-1-window/CMake.png)
+* CMake'i [buradan](http://www.cmake.org/cmake/resources/software.html) indirin ve yükleyin.
+* [Kaynak kodu indirin](http://www.opengl-tutorial.org/download/) ve zipli dosyadan çıkartın, C:\Users\XYZ\Projects\OpenGLTutorials\ dizinine indirebilirsiniz. 
+* CMake'i başlatın. İlk satırda, sıkıştırılmamış klasöre gidin. Emin değilsen,CMakeLists.txt dosyasını içeren klasörü seç. İkinci satırda, bütün derleyicinin işlerini yapacağı yeri girin. Örnek olarak C:\Users\XYZ\Projects\OpenGLTutorials-build-Visual2017-64bits\ ya da  C:\Users\XYZ\Projects\OpenGLTutorials\build\Visual2017-32bits\ klasör yolunu seçebilirsiniz. Her yerde olabileceğine dikkat edin, aynı klasör olması önemli değildir.![]({{site.baseurl}}/assets/images/tuto-1-window/CMake.png)
 
-* Click on the Configure button. Since this is the first time you configure the project, CMake will ask you which compiler you would like to use. Choose wisely depending on step 1. If you have a 64 bit Windows, you can choose 64 bits; if you don't know, choose 32 bits.
-* Click on Configure until all red lines disappear. Click on Generate. Your Visual Studio project is now created. You can now forget about CMake.
-* Open C:\Users\XYZ\Projects\OpenGLTutorials-build-Visual2010-32bits\. You will see a Tutorials.sln file : open it with Visual Studio.
+* Configure butonuna tıklayın. Projeyi ilk kez konfigürasyon yapmak istediğinizde CMake size hangi derleyiciyi kullanacağınızı soracaktır. 1. adıma göre dikkatlice seçin. Eğer 64 bit bilgisayarınız varsa, 64 bit seçebilirsiniz; bilmiyorsanız 32 bit seçebilirsiniz.
+* Bütün kırmızı çizgiler kaybolana kadar Configure butonuna basınız. Generate butonuna basınız. Visual Studio projeniz şimdi oluşturuldu. Şimdi CMake'i unutabilirsin.
+* C:\Users\XYZ\Projects\OpenGLTutorials-build-Visual2010-32bits\ dizinini açın. Tutorials.sln dosyasını göreceksiniz : Visual Studio ile açın.
 ![]({{site.baseurl}}/assets/images/tuto-1-window/directories.png)
 
-In the *Build* menu, click *Build All*. Every tutorial and dependency will be compiled. Each executable will also be copied back into C:\Users\XYZ\Projects\OpenGLTutorials\ . Hopefuly no error occurs.
+*Build* menü içerisinde, *Build All* 'ı tıklayın. Her eğitim ve bağımlılıkları derlenecektir. Her çalıştırılabilir dosya C:\Users\XYZ\Projects\OpenGLTutorials\  dizini içerisine kopyalanacaktır. Umarım hiçbir hata olmaz.
 ![]({{site.baseurl}}/assets/images/tuto-1-window/visual_2010.png)
 
-* Open C:\Users\XYZ\Projects\OpenGLTutorials\playground, and launch playground.exe. A black window should appear.
+* C:\Users\XYZ\Projects\OpenGLTutorials\playground dizinini açın ve playground.exe'yi çalıştırın. Siyah bir pencere görünmeli.
 ![]({{site.baseurl}}/assets/images/tuto-1-window/empty_window.png)
 
 
-You can also launch any tutorial from inside Visual Studio. Right-click on Playground once, "Choose as startup project". You can now debug the code by pressing F5.
+Ayrıca herhangi bir eğitimi Visual Studio'dan da çalıştırabilirsin. Playground üzerinde sağa tıklayıp "Choose as startup project" seçerek yapabiliriz. Şimdi kodu F5 ile debug edebiliriz.
 
 ![]({{site.baseurl}}/assets/images/tuto-1-window/StartupProject.png)
 
@@ -82,7 +81,7 @@ You can also launch any tutorial from inside Visual Studio. Right-click on Playg
 
 ## Building on Linux
 
-They are so many Linux variants out there that it's impossible to list every possible platform. Adapt if required, and don't hesitate to read your distribution's documentation.
+Her bir olası platformu listelemenin mümkün olmadığı çok fazla Linux varyasyonu vardır. Gerekirse uyarlayın ve dağıtımınızın dökümanlarını okumaktan çekinmeyin.
 
  
 
