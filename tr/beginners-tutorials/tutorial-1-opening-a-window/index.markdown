@@ -29,7 +29,7 @@ Bütün eğitimler "Easy C++" ile yazıldı: Kodu mümkün olduğunca basit hale
 
 Hiçbir şey bilmek zorunda değilsin, ama OpenGL hakkında bildiğin herşeyi unutmalısın. glBegin() gibi bir şeyler biliyorsan, unut gitsin. Burada modern OpenGL (OpenGL 3 ve 4) , ve bir çok online eğitimler "eski" OpenGL (OpenGL 1 ve 2) yi öğretir. Kafanız fazla karışmadan bildiğiniz ne varsa unutun.
 
-# Building the tutorials
+# Eğitimlerin oluşturulması
 
 Bütün eğitimler Windows, Linux ve Mac üzerinde oluşturulabilinir. Bütün platformlar için, prosedür kabaca aynıdır :
 
@@ -43,7 +43,7 @@ Bütün eğitimler Windows, Linux ve Mac üzerinde oluşturulabilinir. Bütün p
 
 Her platform için detaylı procedürler şimdi verilecektir. Uyarlamalar gerekli olabilir. Emin değilseniz, Windows için talimatları okuyun ve bunları uyarlamaya çalışın.
 
-## Building on Windows
+## Windows üzerinde kurulum
 
  
 
@@ -79,120 +79,120 @@ Ayrıca herhangi bir eğitimi Visual Studio'dan da çalıştırabilirsin. Playgr
 
 
 
-## Building on Linux
+## Linux üzerinde kurulum
 
 Her bir olası platformu listelemenin mümkün olmadığı çok fazla Linux varyasyonu vardır. Gerekirse uyarlayın ve dağıtımınızın dökümanlarını okumaktan çekinmeyin.
 
  
 
-* Install the latest drivers. We highly recommend the closed-source binary drivers. It's not GNU or whatever, but they work. If your distribution doesn't provide an automatic install, try [Ubuntu's guide](http://help.ubuntu.com/community/BinaryDriverHowto).
-* Install all needed compilers, tools & libs. Complete list is : *cmake make g++ libx11-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxrandr-dev libxext-dev libxcursor-dev libxinerama-dev libxi-dev* . Use `sudo apt-get install *****` or `su && yum install ******`.
-* [Download the source code](http://www.opengl-tutorial.org/download/) and unzip it, for instance in ~/Projects/OpenGLTutorials/
-* cd in ~/Projects/OpenGLTutorials/ and enter the following commands :
+* En son sürücüleri yükleyin. Install the latest drivers. Kapalı kaynak binary sürücüleri tavsiye ediyoruz. GNU değil ya da her neyse, ama çalışıyorlar. Dağıtımınız otomatik yükleme sağlamıyorsa, [Ubuntu'nun rehberini](http://help.ubuntu.com/community/BinaryDriverHowto) deneyiniz.
+* Bütün gerekli derleyicileri, araçları ve kütüphaneleri yükleyin. Bütün liste : *cmake make g++ libx11-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxrandr-dev libxext-dev libxcursor-dev libxinerama-dev libxi-dev* . `sudo apt-get install *****` or `su && yum install ******` komutları ile kullanabilirsiniz.
+* [Kaynak kodu indirin](http://www.opengl-tutorial.org/download/) ve zip dosyasından çıkartın,  örnek olarak ~/Projects/OpenGLTutorials/ dizinine çıkartabilirsiniz. 
+* cd ile ~/Projects/OpenGLTutorials/ dizinine gidin ve aşağıdaki komutları girin:
 
  * mkdir build
  * cd build
  * cmake ..
 
 
-* A makefile has been created in the build/ directory.
-* type "make all". Every tutorial and dependency will be compiled. Each executable will also be copied back into ~/Projects/OpenGLTutorials/ . Hopefuly no error occurs.
-* Open ~/Projects/OpenGLTutorials/playground, and launch ./playground. A black window should appear.
+* build/ dizininde bir makefile dosyası oluşturulmuştur.
+* "make all" yazın. Her eğitim ve gereklilikler derlenmiş olacaktır. Her çalıştırılabilir  dosya ~/Projects/OpenGLTutorials/ dizinine kopyalanacaktır. Umarım hiçbir hata oluşmaz.
+* ~/Projects/OpenGLTutorials/playground  dizinini açın, ./playground çalıştırın. Bir siyah pencere görünecektir. A black window should appear.
 
-Note that you really should use an IDE like [Qt Creator](http://qt-project.org/). In particular, this one has built-in support for CMake, and it will provide a much nicer experience when debugging. Here are the instructions for QtCreator :
+[Qt Creator](http://qt-project.org/) gibi bir IDE kullanmanız gerektiğini unutmayın. Özellikle, CMake içiin built-in destek vardır ve debug yaparken daha güzel bir deneyim sağlayacaktır. QtCreator için kullanım talimatları :
 
-* In QtCreator, go to File->Tools->Options->Compile&Execute->CMake
-* Set the path to CMake. This is most probably /usr/bin/cmake
-* File->Open Project; Select tutorials/CMakeLists.txt
-* Select a build directory, preferably outside the tutorials folder
-* Optionally set -DCMAKE_BUILD_TYPE=Debug in the parameters box. Validate.
-* Click on the hammer on the bottom. The tutorials can now be launched from the tutorials/ folder.
-* To run the tutorials from QtCreator, click on Projects->Execution parameters->Working Directory, and select the directory where the shaders, textures & models live. Example for tutorial 2 : ~/opengl-tutorial/tutorial02_red_triangle/
+* QtCreator içerisinde, File->Tools->Options->Compile&Execute->CMake dizinine gidin
+* CMake yolunu belirtin. Büyük olasılıkla /usr/bin/cmake olacaktır
+* File->Open Project; tutorials/CMakeLists.txt dosyasını seçiniz
+* Derleme yapılacak klasörü seçiniz , tercihen eğitim klasörünün dışında
+* İsteğe bağlı olarak -DCMAKE_BUILD_TYPE=Debug parametre kutusundan ayarlayabilirsiniz. Doğrulayın.
+* Alttaki çekiç üzerine tıklayın. Eğitimler artık tutorials/ klasöründen başlatılabilir.
+* Eğitimleri QtCreatorden çalıştırmak içi, Projects->Execution parameters->Working Directory' ye tıklayınız ve  shaderların, textureların & modellerin bulunduğu dizini seçin. Örnek tutorial 2 için : ~/opengl-tutorial/tutorial02_red_triangle/
 
 
-## Building on Mac
+## Mac üzerinde kurulum
 
-The procedure is very similar to Windows' (Makefiles are also supported, but won't be explained here) :
+Prosedür Windows'a çok benziyor. (Makefile dosyalarıda destekleniyor, ancak burada açıklanmayacaktır.) :
 
-* Install XCode from the Mac App Store
-* [Download CMake](http://www.cmake.org/cmake/resources/software.html), and install the .dmg . You don't need to install the command-line tools.
-* [Download the source code](http://www.opengl-tutorial.org/download/) and unzip it, for instance in ~/Projects/OpenGLTutorials/ .
-* Launch CMake (Applications->CMake). In the first line, navigate to the unzipped folder. If unsure, choose the folder that contains the CMakeLists.txt file. In the second line, enter where you want all the compiler's stuff to live. For instance, you can choose ~/Projects/OpenGLTutorials_bin_XCode/. Notice that it can be anywhere, not necessarily in the same folder.
-* Click on the Configure button. Since this is the first time you configure the project, CMake will ask you which compiler you would like to use. Choose Xcode.
-* Click on Configure until all red lines disappear. Click on Generate. Your Xcode project is now created. You can forget about CMake.
-* Open ~/Projects/OpenGLTutorials_bin_XCode/ . You will see a Tutorials.xcodeproj file : open it.
-* Select the desired tutorial to run in Xcode's Scheme panel, and use the Run button to compile & run :
+* XCode uygulamasını Mac App Store'dan indirin. 
+* [CMake'i indirin](http://www.cmake.org/cmake/resources/software.html), ve .dmg yi yükleyin. Komut satırı araçlarını indirmenize gerek yoktur.
+* [Kaynak kodu indirin](http://www.opengl-tutorial.org/download/) ve zip içerisinden çıkartın, örnek olarak ~/Projects/OpenGLTutorials/ bu dizine çıkartabilirsiniz .
+* CMake'i çalıştırın (Applications->CMake). İlk satırda, sıkıştırılmamış klasöre gidin. Emin değilsen,CMakeLists.txt dosyasını içeren klasörü seçin.  İkinci satırda, bütün derleyicinin işlerini yapacağı yeri girin. Örnek olarak ~/Projects/OpenGLTutorials_bin_XCode/ klasör yolunu seçebilirsiniz. Her yerde olabileceğine dikkat edin, aynı klasör olması önemli değildir.!
+* Configure butonuna tıklayın. Projeyi ilk kez konfigürasyon yapmak istediğinizde CMake size hangi derleyiciyi kullanacağınızı soracaktır. Xcode'u seçin.
+* Bütün kırmızı çizgiler kaybolana kadar Configure butonuna basınız. Generate butonuna basınız. XCode projeniz şimdi oluşturuldu, CMake'i unutabilirsiniz.
+* ~/Projects/OpenGLTutorials_bin_XCode/ dizinine gidin. Tutorials.xcodeproj dosyasını göreceksiniz : dosyayı açın.
+* XCode'un Schema panelinde çalıştırmak için istediğiniz eğitimi seçin, derlemek ve çalıştırmak için Run butonunu kullanın:
 
 ![]({{site.baseurl}}/assets/images/tuto-1-window/Xcode-projectselection.png)
 
 
-## Note for Code::Blocks
+## Code::Blocks için Not
 
-Due to 2 bugs (one in C::B, one in CMake), you have to edit the command-line in Project->Build Options->Make commands, as follows :
+2 hata nedeniyle(biri C::B, bir tane CMake'de), komut satırını Project->Build Options->Make komutlarında aşağıdaki gibi düzenleyiniz :
 
 ![]({{site.baseurl}}/assets/images/tuto-1-window/CodeBlocksFix.png)
 
 
-You also have to setup the working directory yourself : Project->Properties -> Build targets -> tutorial N -> execution working dir ( it's src_dir/tutorial_N/ ).
+Ayrıca çalışma dizininizi kendiniz ayarlamanız gerekiyor: Project->Properties -> Build targets -> tutorial N -> execution çalışma klasörü ( bu src_dir/tutorial_N/ klasördür. ).
 
-# Running the tutorials
+# Eğitimleri Çalıştırma
 
-You should run the tutorials directly from the right directory : simply double-click on the executable. If you like command line best, cd to the right directory.
+Eğitimleri doğruca doğru dizinden çalıştırmalısınız: sadece çalıştırılabilir dosyaya çift tıklayın. Komut satırını seviyorsanız, cd komutu ile doğru dizine gidin.
 
-If you want to run the tutorials from the IDE, don't forget to read the instructions above to set the correct working directory.
+Eğitimleri IDE ile çalıştırmak istiyorsanız, Çalışma klasörünü doğru ayarlamak için yukarıdaki talimatları okumayı unutmayın.
 
-# How to follow these tutorials
+# Eğitimleri Nasıl Takip Etmeliyim? 
 
-Each tutorial comes with its source code and data, which can be found in tutorialXX/. However, you will never modify these projects : they are for reference only. Open playground/playground.cpp, and tweak this file instead. Torture it in any way you like. If you are lost, simply cut'n paste any tutorial in it, and everything should be back to normal.
+Her eğitim tutorialXX/ dizini içerisinde bulabileceğiniz kendi kaynak kodu ve datası ile gelir. Ancak bu projeleri asla değiştirmeyin etmeyin: Bunlar sadece referans içindir. playground/playground.cpp dosyasını açın ve bu dosya üzerinde değişiklik yapın. İstediğiniz şekilde değişiklik yapabilirsiniz. Eğer kafanız karışır ve işin içinden çıkamazsanız, sadece hangi eğitimde iseniz onun kodlarını kopyalayın ve yapıştırın, her şey normale dönecektir.
 
-We will provide snippets of code all along the tutorials. Don't hesitate to cut'n paste them directly in the playground while you're reading : experimentation is good. Avoid simply reading the finished code, you won't learn a lot this way. Even with simple cut'n pasting, you'll get your boatload of problems.
+Bütün eğitimler boyunca kod parçaları sunacağız. Okurken onları playgorund alanına doğrudan kopyalayıp yapıştırmaya tereddür etmeyin, denemek iyidir. Bitmiş kodu okumaktan kaçının, bu şekilde çok şey öğrenemeyeceksiniz. Sadece kopyala yapıştırma ile bile çok rahat öğrenebilirsiniz.
 
-# Opening a window
+# Pencere Açmakwindow
 
-Finally ! OpenGL code !
-Well, not really. Many tutorials show you the "low level" way to do things, so that you can see that no magic happens. But the "open a window" part is actually very boring and useless, so we will use GLFW, an external library, to do this for us instead. If you really wanted to, you could use the Win32 API on Windows, the X11 API on Linux, and the Cocoa API on Mac; or use another high-level library like SFML, FreeGLUT, SDL, ... see the [Links](http://www.opengl-tutorial.org/miscellaneous/useful-tools-links/) page.
+Sonunda ! OpenGL kod !
+Şey, aslında değil, Birçok eğitim size, bir şeyler yapmanın "low lewel" yolunu gösterir, böylece hiç bir sihrin gerçekleşmediğini görebilirsiniz. Ama "open a window" kısmı aslında çok sıkıcı ve işe yaramaz, bu yüzden bunun yerine bunu yapmak için bir external kütüphane olan GLFW'yi kullanacağız. Gerçekten istiyorsanız, Windows üzerinde Win32 API'sini, Linux'ta X11 API'sini ve Mac'te Cocoa API'sini kullanabilirsiniz; veya SFML, FreeGLUT, SDL gibi başka bir yüksek seviye kütüphane kullanabilirsiniz. [Buradan](http://www.opengl-tutorial.org/miscellaneous/useful-tools-links/) inceleyebilirsiniz.
 
-Ok, let's go. First, we'll have to deal with dependencies : we need some basic stuff to display messages in the console :
+Hadi başlayalım. İlk olarak, bağımlılıklarla uğraşmak zorundayız: konsoldaki mesajları görüntülemek için bazı temel şeylere ihtiyacımız var:
 
 ``` cpp
-// Include standard headers
+// Standart kütüphaneleri ekliyoruz.
 #include <stdio.h>
 #include <stdlib.h>
 ```
 
-First, GLEW. This one actually is a little bit magic, but let's leave this for later.
+İlk olarak, GLEW. Bu aslında biraz büyülü, daha sonra bunu detaylı inceleyeceğiz.
 
 ``` cpp
-// Include GLEW. Always include it before gl.h and glfw3.h, since it's a bit magic.
+// GLEW kütüphanesini ekleyin. Her zaman gl.h ve glfw3.h kütüphanesinden önce ekleyin.
 #include <GL/glew.h>
 ```
 
-We decided to let GLFW handle the window and the keyboard, so let's include it too :
+Pencereyi ve klavyeyi kullanmamız için gerekli olan GLFW kütüphanesini ekliyoruz.
 
 ``` cpp
-// Include GLFW
+// GLFW kütüphanesinin eklenmesi
 #include <GLFW/glfw3.h>
 ```
 
-We don't actually need this one right now, but this is a library for 3D mathematics. It will prove very useful soon. There is no magic in GLM, you can write your own if you want; it's just handy. The "using namespace" is there to avoid typing "glm::vec3", but "vec3" instead.
+Bu kütüphaneye şimdilik ihtiyacımız yok ancak bu kütüphane 3B matematik kütüphanesidir. Faydasını ilerleyen eğitimlerde göreceğiz. Herhangi bir ayrıcalığı yoktur GLM'nin eğer isterseniz kendiniz de yazabilirsiniz. Kullanışlı bir kütüphanedir. "using namespace", "glm::vec3" yazmak yerine "vec3" yazmak için eklenmiştir.
 
 ``` cpp
-// Include GLM
+// GLM kütüphanesini ekliyoruz.
 #include <glm/glm.hpp>
 using namespace glm;
 ```
 
-If you cut'n paste all these #include's in playground.cpp, the compiler will complain that there is no main() function. So let's create one :
+Playground.cpp dosyasına bütün #include kütüphanelerini kopyalayıp yapıştırdıktan sonra derleyici main() fonksiyonun olmadığını hata olarak verecektir. main() fonksiyonunu oluşturalım :
 
 ``` cpp
 int main(){
 ```
 
-First thing to do it to initialize GLFW :
+İlk olarak GLFW' yi yüklemeliyiz :
 
 ``` cpp
-// Initialise GLFW
-glewExperimental = true; // Needed for core profile
+// GLFW yüklenmesi
+glewExperimental = true; // Core Profil için gerekli
 if( !glfwInit() )
 {
     fprintf( stderr, "Failed to initialize GLFW\n" );
@@ -200,18 +200,18 @@ if( !glfwInit() )
 }
 ```
 
-We can now create our first OpenGL window !
+Şimdi ilk OpenGL penceremizi oluşturabiliriz !
 
  
 
 ``` cpp
 glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
-glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // We want OpenGL 3.3
+glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL 3.3 
 glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
-glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // We don't want the old OpenGL 
+glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // MacOS için kullanılabilinir, kullanılmasa da olur.
+glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // OpenGL' in eski versiyonunu istemiyoruz. 
 
-// Open a window and create its OpenGL context
+// Pencere açıyoruz ve OpenGL kaynaklarını oluşturuyoruz.
 GLFWwindow* window; // (In the accompanying source code, this variable is global for simplicity)
 window = glfwCreateWindow( 1024, 768, "Tutorial 01", NULL, NULL);
 if( window == NULL ){
@@ -227,10 +227,10 @@ if (glewInit() != GLEW_OK) {
 }
 ```
 
-Build this and run. A window should appear, and be closed right away. Of course! We need to wait until the user hits the Escape key :
+Bu kodu derleyip çalıştıralım. Bir pencerenin açılıp ardından kapandığını göreceksiniz. Kullanıcının Escape tuşuna basana kadar beklemesine ihtiyacımız var:
 
 ``` cpp
-// Ensure we can capture the escape key being pressed below
+// Aşağıda Escape tuşuna basıldığını yakalamamız için gereklidir.
 glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 do{
@@ -248,4 +248,4 @@ while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
        glfwWindowShouldClose(window) == 0 );
 ```
 
-And this concludes our first tutorial ! In Tutorial 2, you will learn how to actually draw a triangle.
+Ve bu bizim ilk eğitimimizi tamamlıyor! Eğitim 2'de bir üçgenin nasıl çizildiğini göreceksiniz.
