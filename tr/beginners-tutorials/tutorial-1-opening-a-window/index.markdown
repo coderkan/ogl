@@ -2,7 +2,7 @@
 layout: tutorial
 status: publish
 published: true
-title: 'Tutorial 1 : Opening a window'
+title: 'Eğitim 1 : Pencere Açmak'
 date: '2011-04-07 17:54:16 +0200'
 date_gmt: '2011-04-07 17:54:16 +0200'
 categories: [tuto]

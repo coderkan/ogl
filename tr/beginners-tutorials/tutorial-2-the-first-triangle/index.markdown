@@ -2,7 +2,7 @@
 layout: tutorial
 status: publish
 published: true
-title: 'Tutorial 2 : The first triangle'
+title: 'Eğitim 2 : Üçgen Oluşturmak'
 date: '2011-04-07 18:54:11 +0200'
 date_gmt: '2011-04-07 18:54:11 +0200'
 categories: [tuto]
@@ -13,17 +13,17 @@ tags: []
 * TOC
 {:toc}
 
-This will be another long tutorial.
+Bu uzun bir eğitim olacak.
 
-OpenGL 3 makes it easy to write complicated stuff, but at the expense that drawing a simple triangle is actually quite difficult.
+OpenGL 3 karmaşık şeyler yazmamızı kolaylaştırır, ancak basit bir üçgen çizmek aslında oldukça zordur.
 
-Don't forget to cut'n paste the code on a regular basis.
+Kodu düzenli olarak yapıştırmayı unutmayın.
 
-**<span style="color: red">If the program crashes at startup, you're probably running from the wrong directory. Read CAREFULLY the [first tutorial]({{ site.baseurl }}/beginners-tutorials/tutorial-1-opening-a-window/) and the [FAQ]({{ site.baseurl }}/miscellaneous/faq/) on how to configure Visual Studio !</span>**
+**<span style="color: red">Program başlangıçta çalışmıyorsa, büyük ihtimal yanlış çalışma klasöründe çalışıyorsunuzdur. Dikkatlice  [ilk eğitim]({{ site.baseurl }}/beginners-tutorials/tutorial-1-opening-a-window/)'i okuyun ve [SSS]({{ site.baseurl }}/miscellaneous/faq/) Visual Studio' nun nasıl konfigürasyon yapıldığını okuyun!</span>**
 
-# The VAO
+# VAO (Vertex Array Object)
 
-I won't dig into details now, but you need to create a Vertex Array Object and set it as the current one :
+Çok fazla detaya girmeyeceğim, ama bir Vertex Array Object yaratmalısınız ve ayarlamalısınız :
 
 ``` cpp
 GLuint VertexArrayID;
@@ -31,32 +31,32 @@ glGenVertexArrays(1, &VertexArrayID);
 glBindVertexArray(VertexArrayID);
 ```
 
-Do this once your window is created (= after the OpenGL Context creation) and before any other OpenGL call.
+Pencere oluşturulduktan sonra bunu yapın (= OpenGL Context oluşturulmasından sonra) ve diğer OpenGL methodlarının çağrılmasından önce.
 
-If you really want to know more about VAOs, there are a few other tutorials out there, but this is not very important.
+Eğer gerçekten VAO'lar hakkında daha fazla bilgi sahibi olmak istiyorsanız, orada birkaç başka eğitim bulunmakta, ama bu çok önemli değil.
 
-# Screen Coordinates
+# Ekran Koordinatları
 
-A triangle is defined by three points. When talking about "points" in 3D graphics, we usually use the word "vertex" ( "vertices" on the plural ). A vertex has 3 coordinates : X, Y and Z. You can think about these three coordinates in the following way :
+Bir üçgen üç nokta ile tanımlanır. 3 Boyutlu grafiklerde "noktalar"(points) üzerinde konuşurken, genellikle "vertex" ( "vertices" çoğullarında ) sözcüğünü kullanırız. Bir vertex 3 koordinata sahiptir : X, Y ve Z. Bu üç koordinatı aşağıdaki şekilde düşünebilirsiniz:
 
-- X in on your right
-- Y is up
-- Z is towards your back (yes, behind, not in front of you)
+- X sağında
+- Y yukarı
+- Z arkaya doğru(evet, arkanda, önünde değil)
 
-But here is a better way to visualize this : use the Right Hand Rule
+Bunu daha görselleştirebilmek için daha iyi bir yol var: Sağ El Kuralı'nı kullanın.
 
-- X is your thumb
-- Y is your index
-- Z is your middle finger. If you put your thumb to the right and your index to the sky, it will point to your back, too.
+- X senin parmağın is your thumb
+- Y senin indeksin is your index
+- Z senin orta parmağın. Eğer baş parmağınızı sağa ve indeksinizi gökyüzüne tutarsanız, sizin arkanızı gösterecektir.
 
-Having the Z in this direction is weird, so why is it so ? Short answer : because 100 years of Right Hand Rule Math will give you lots of useful tools. The only downside is an unintuitive Z.
+Z'nin bu yönde olması garip, neden böyle? Kısaca : Sağ El Kuralı 100 yıl boyunca Matematikte çok sayıda yarar sağlamıştır size de yararlı araç verecektir. Tek dezavantajı sezgisel olmayan Z.
 
-On a side note, notice that you can move your hand freely : your X, Y and Z will be moving, too. More on this later.
+Bir yan notta, elinizi serbestçe hareket  ettirebileceğinizi unutmayın: X, Y ve Z'niz de hareket edecektir. Daha sonra bunun üzerine konuşacağız.
 
-So we need three 3D points in order to make a triangle ; let's go :
+Yani bir üçgen yapmak için 3B noktaya ihtiyacımız var; Hadi başlayalım :
 
 ``` cpp
-// An array of 3 vectors which represents 3 vertices
+// 3 noktayı temsil eden 3 vektör dizisi 
 static const GLfloat g_vertex_buffer_data[] = {
    -1.0f, -1.0f, 0.0f,
    1.0f, -1.0f, 0.0f,
@@ -64,30 +64,30 @@ static const GLfloat g_vertex_buffer_data[] = {
 };
 ```
 
-The first vertex is (-1,-1,0). This means that _unless we transform it in some way_, it will be displayed at (-1,-1) on the screen. What does this mean ? The screen origin is in the middle, X is on the right, as usual, and Y is up. This is what it gives on a wide screen :
+Birinci vertex (-1,-1,0)'dir. Bunun anlamı bir şekilde dönüştürmedikçe, ekranda (-1,-1) olarak görüntülenecek anlamına gelir. Bu ne anlama geliyor?  Ekran orijin bölgesi ortada, X sağda, her zamanki gibi Y yukarı. Geniş ekranda verdiği şey budur :
 
 ![screenCoordinates]({{site.baseurl}}/assets/images/tuto-2-first-triangle/screenCoordinates.png){: height="165px" width="300px"}
 
-This is something you can't change, it's built in your graphics card. So (-1,-1) is the bottom left corner of your screen. (1,-1) is the bottom right, and (0,1) is the middle top. So this triangle should take most of the screen.
+Bu değiştiremeyeceğiniz bir şeydir, grafik kartınızda yerleşiktir. Dolayısıyla (-1,-1) ekranın sol alt köşesinde yer alır, (1,-1) sağ üst köşede ve (0,1) ise orta üstte yer alır. Yani bu üçgen ekranın çoğunu kaplamalı.
 
-# Drawing our triangle
+# Üçgenin Çizilmesi
 
-The next step is to give this triangle to OpenGL. We do this by creating a buffer:
+Bir sonraki adım bu üçgeni OpenGL'e vermektir. Bunu bir buffer oluşturarak yaparız:
 
 ```cpp
-// This will identify our vertex buffer
+// Bu bizim vertex buffer'ı mızı tanımlayacak
 GLuint vertexbuffer;
-// Generate 1 buffer, put the resulting identifier in vertexbuffer
+// 1 buffer üretin, sonuç tanımlayıcısını vertexbuffer'a yerleştirin.
 glGenBuffers(1, &vertexbuffer);
-// The following commands will talk about our 'vertexbuffer' buffer
+// Aşağıdaki komutlar bizim 'vertexbuffer''ımızla konuşacaktır.
 glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-// Give our vertices to OpenGL.
+// vertices'lerimizi OpenGL'e veriyoruz.
 glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 ```
 
-This needs to be done only once.
+Bunun sadece bir kez yapılması gerekiyor.
 
-Now, in our main loop, where we used to draw "nothing", we can draw our magnificent triangle :
+Şimdi, ana döngümüzde, hiçbir şey çizmediğimiz yerde muhteşem üçgenimizi çizebiliriz:
 
 ``` cpp
 // 1st attribute buffer : vertices
@@ -101,24 +101,24 @@ glVertexAttribPointer(
    0,                  // stride
    (void*)0            // array buffer offset
 );
-// Draw the triangle !
+// Üçgen Çizimi
 glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
 glDisableVertexAttribArray(0);
 ```
 
-If you're lucky, you can see the result in white. (<span style="color: red">**Don't panic if you don't**</span> some systems require a shader to show anything) :
+Şanslıysanız, sonucu beyaz olarak görebilirsiniz. (<span style="color: red">**Olmadıysa Panik yapmayınDon't panic if you don't**</span> bazı sistemler herhangi bir şey göstermek için bir shader'a ihtiyaç duyarlar :
 
 ![triangle_no_shader]({{site.baseurl}}/assets/images/tuto-2-first-triangle/triangle_no_shader1.png){: height="232px" width="300px"}
 
-Now this is some boring white. Let's see how we can improve it by painting it in red. This is done by using something called shaders.
+Şimdi bu biraz sıkıcı beyaz. Kırmızıya boyayarak nasıl geliştirebileceğimizi görelim. Bu shader kullanılarak yapılır.
 
 # Shaders
 
-## Shader Compilation
+## Shader Derleme
 
-In the simplest possible configuration, you will need two shaders : one called Vertex Shader, which will be executed for each vertex, and one called Fragment Shader, which will be executed for each sample. And since we use 4x antialising, we have 4 samples in each pixel.
+Mümkün olan en basit konfigürasyonda, iki shader'a ihtiyacınız olacak: birincisi her bir vertex için çalıştırılacak olan Vertex Shader ve her örnek için çalıştırılacak olan Fragment Shader. And 4x antialising kullandığımızdan, her bir pikselde 4 tane örneğimiz var.
 
-Shaders are programmed in a language called GLSL : GL Shader Language, which is part of OpenGL. Unlike C or Java, GLSL has to be compiled at run time, which means that each and every time you launch your application, all your shaders are recompiled.
+Shaderlar GLSL programlama dili ile programlanır: GL Shader Language OpenGL'in bir parçasıdır. C veya Java'dan farklı olarak çalışma anında derlenir. Bunun anlamı uygulamanızı her çalıştırdığınızda, bütün shaderlarınız tekrardan derlenecektir.
 
 The two shaders are usually in separate files. In this example, we have SimpleFragmentShader.fragmentshader and SimpleVertexShader.vertexshader . The extension is irrelevant, it could be .txt or .glsl .
 
