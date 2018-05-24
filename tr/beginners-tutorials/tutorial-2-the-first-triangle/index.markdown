@@ -120,18 +120,18 @@ Mümkün olan en basit konfigürasyonda, iki shader'a ihtiyacınız olacak: biri
 
 Shaderlar GLSL programlama dili ile programlanır: GL Shader Language OpenGL'in bir parçasıdır. C veya Java'dan farklı olarak çalışma anında derlenir. Bunun anlamı uygulamanızı her çalıştırdığınızda, bütün shaderlarınız tekrardan derlenecektir.
 
-The two shaders are usually in separate files. In this example, we have SimpleFragmentShader.fragmentshader and SimpleVertexShader.vertexshader . The extension is irrelevant, it could be .txt or .glsl .
+Bu shader dosyaları ayrı ayrı dosyalardır. Bu örnekte, The two shaders are usually in separate files. Bu örnekte, SimpleFragmentShader.fragmentshader ve SimpleVertexShader.vertexshader var. Dosya uzantısı .glsl ya da .txt olabilir.
 
-So here's the code. It's not very important to fully understand it, since you often do this only once in a program, so comments should be enough. Since this function will be used by all other tutorials, it is placed in a separate file : common/loadShader.cpp . Notice that just as buffers, shaders are not directly accessible : we just have an ID. The actual implementation is hidden inside the driver.
+İşte kod burada. So here's the code. Bunu tam olarak anlamak çok da önemli değil, çünkü bunu genellikle bir programda sadece bir kez yapıyorsunuz, bu yüzden yorumlar yeterli olmalı. Bu fonksiyon diğer eğitimlerde kullanılacağından, ayrı bir dosya olarak yerleştirilir: common/loadShader.cpp. Bufferlar gibi, shaderlarada doğrudan erişilemediğine dikkat edin: Sadece ID var. Gerçek uygulama sürücüde gizlidir.
 
 ``` cpp
 GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path){
 
-	// Create the shaders
+	// Shaderların oluşturulması
 	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
-	// Read the Vertex Shader code from the file
+	// Vertex Shader'ın dosyadan okunması
 	std::string VertexShaderCode;
 	std::ifstream VertexShaderStream(vertex_file_path, std::ios::in);
 	if(VertexShaderStream.is_open()){
@@ -145,7 +145,7 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 		return 0;
 	}
 
-	// Read the Fragment Shader code from the file
+	// Fragment Shader'ın dosyadan okunması
 	std::string FragmentShaderCode;
 	std::ifstream FragmentShaderStream(fragment_file_path, std::ios::in);
 	if(FragmentShaderStream.is_open()){
@@ -158,13 +158,13 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 	GLint Result = GL_FALSE;
 	int InfoLogLength;
 
-	// Compile Vertex Shader
+	// Vertex Shader derlenmesi
 	printf("Compiling shader : %s\n", vertex_file_path);
 	char const * VertexSourcePointer = VertexShaderCode.c_str();
 	glShaderSource(VertexShaderID, 1, &VertexSourcePointer , NULL);
 	glCompileShader(VertexShaderID);
 
-	// Check Vertex Shader
+	// Vertex Shader kontrolü
 	glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &Result);
 	glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	if ( InfoLogLength > 0 ){
@@ -173,13 +173,13 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 		printf("%s\n", &VertexShaderErrorMessage[0]);
 	}
 
-	// Compile Fragment Shader
+	// Fragment Shader derlenmesi
 	printf("Compiling shader : %s\n", fragment_file_path);
 	char const * FragmentSourcePointer = FragmentShaderCode.c_str();
 	glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , NULL);
 	glCompileShader(FragmentShaderID);
 
-	// Check Fragment Shader
+	// Fragment Shader kontrolü
 	glGetShaderiv(FragmentShaderID, GL_COMPILE_STATUS, &Result);
 	glGetShaderiv(FragmentShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	if ( InfoLogLength > 0 ){
@@ -195,7 +195,7 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 	glAttachShader(ProgramID, FragmentShaderID);
 	glLinkProgram(ProgramID);
 
-	// Check the program
+	// Program kontrolü
 	glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
 	glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	if ( InfoLogLength > 0 ){
@@ -214,38 +214,38 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 }
 ```
 
-## Our Vertex Shader
+## Vertex Shader'ımız
 
-Let's write our vertex shader first.
-The first line tells the compiler that we will use OpenGL 3's syntax.
+Önce Vertex Shader'ımızı yazalım.
+İlk satır derleyiciye OpenGL 3'ün systaxlarını kullanacağımızı belirtir.
 
 ``` glsl
 #version 330 core
 ```
 {: .highlightglslvs }
 
-The second line declares the input data :
+İkinci satır giriş verilerini tanımlar:
 
 ``` glsl
 layout(location = 0) in vec3 vertexPosition_modelspace;
 ```
 {: .highlightglslvs }
 
-Let's explain this line in detail :
+Bu satırı ayrıntılı açıklayalım :
 
-- "vec3" is a vector of 3 components in GLSL. It is similar (but different) to the glm::vec3 we used to declare our triangle. The important thing is that if we use 3 components in C++, we use 3 components in GLSL too.
-- "layout(location = 0)" refers to the buffer we use to feed the *vertexPosition_modelspace* attribute. Each vertex can have numerous attributes : A position, one or several colours, one or several texture coordinates, lots of other things. OpenGL doesn't know what a colour is : it just sees a vec3. So we have to tell him which buffer corresponds to which input. We do that by setting the layout to the same value as the first parameter to glVertexAttribPointer. The value "0" is not important, it could be 12 (but no more than glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &v) ), the important thing is that it's the same number on both sides.
-- "vertexPosition_modelspace" could have any other name. It will contain the position of the vertex for each run of the vertex shader.
-- "in" means that this is some input data. Soon we'll see the "out" keyword.
+- "vec3", GLSL'deki 3 bileşenin bir vektörüdür. Üçgeni tanımlamak için kullandığımız glm::vec3'e benzer(ama farklı). Önemli olan, C ++ 'da 3 bileşen kullanırsak, GLSL'de de 3 bileşen kullanıyoruz.
+- "layout(location = 0)" *vertexPosition_modelspace* özniteliğini beslemek için kullandığımız buffera işaret eder. Her vertex çok sayıda özelliğe sahiptir: Bir pozisyon, bir veya birkaç renk, bir veya birkaç texture koordinatı, diğer birçok şey. OpenGL bir rengin ne olduğunu bilmiyor: sadece bir vec3 görüyor. Bu yüzden hangi buffer'ın hangi girişe karşılık geldiğini söylemeliyiz. Bunu glVertexAttribPointer'ın ilk parametresi ile aynı değere ayarlayarak yaparız. "0" değeri önemli değildir, 12 olabilir (ancak glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &v)'den fazla olamaz ), önemli olan her iki tarafta da aynı sayı olmasıdır.
+- "vertexPosition_modelspace" başka bir ada sahip olabilir. Vertex shaderların çalışması için vertex pozisyonunu içerecektir.
+- "in"'in anlamı giriş datasıdır. "out" kelimesinin anlamını birazdan açıklayacağız.
 
-The function that is called for each vertex is called main, just as in C :
+Her vertex için çağrılan fonksiyon, tıpkı C'deki gibi main olarak adlandırılır :
 
 ``` glsl
 void main(){
 ```
 {: .highlightglslvs }
 
-Our main function will merely set the vertex' position to whatever was in the buffer. So if we gave (1,1), the triangle would have one of its vertices at the top right corner of the screen. We'll see in the next tutorial how to do some more interesting computations on the input position.
+Main fonksiyonumuz buffer'ın içinde bulunan değerleri vertex pozisyonuna set edecektir. Yani eğer (1,1) değerini verirsek, üçgenin ekranın sağ üst köşe noktalarını belirtmiş olacağız. Bir sonraki eğitimde, giriş pozisyonunda daha ilginç hesaplamalar yapmayı göreceğiz.
 
 ``` glsl
   gl_Position.xyz = vertexPosition_modelspace;
@@ -254,11 +254,11 @@ Our main function will merely set the vertex' position to whatever was in the bu
 ```
 {: .highlightglslvs }
 
-gl_Position is one of the few built-in variables : you *have *to assign some value to it. Everything else is optional; we'll see what "everything else" means in Tutorial 4.
+gl_Position bir kaç built-in değişkenden biridir: Bazı değerleri bu değişkene atamalısınız. Diğer her şey isteğe bağlıdır; Eğitim 4'te "her şey"'in ne anlama geldiğini göreceğiz.
 
-## Our Fragment Shader
+## Fragment Shader'ımız
 
-For our first fragment shader, we will do something really simple : set the color of each fragment to red. (Remember, there are 4 fragment in a pixel because we use 4x AA)
+İlk fragment shader'ımız için gerçekten basit bir şey yapacağız: her parçanın rengini kırmızıya ayarlayalım. (unutmayın, bir pikselde 4 fragment var çünkü 4x AA kullanıyoruz)
 
 ``` glsl
 #version 330 core
@@ -269,39 +269,39 @@ void main(){
 ```
 {: .highlightglslfs }
 
-So yeah, vec3(1,0,0) means red. This is because on computer screens, colour is represented by a Red, Green, and Blue triplet, in this order. So (1,0,0) means Full Red, no green and no blue.
+vec3(1,0,0)'ün anlamı kırmızı rengin anlamına gelir. Bunun nedeni, bilgisayar ekranlarında, rengin bu sırayla Kırmızı, Yeşil ve Mavi üçlü ile temsil edilmesidir. Dolayısıyla (1,0,0)'in anlamı sadece Kırmızı,  Yeşil yok ve Mavi yok.
 
-# Putting it all together
+# Hepsini Bir Araya Koyalım
 
-Import our LoadShaders function as the last include:
+LoadShaders fonksiyonumuzu en alta include olarak ekliyoruz:
 
 ```cpp
 #include <common/shader.hpp>
 ```
 
-Before the main loop, call our LoadShaders function:
+Ana döngüden önce, LoadShaders fonksiyonumuzu çağırıyoruz:
 
 ```cpp
-// Create and compile our GLSL program from the shaders
+// Shader'lardan alınan GLSL programını oluştur ve derle.
 GLuint programID = LoadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
 ```
 
-Now inside the main loop, first clear the screen. This will change the background color to dark blue because of the previous glClearColor(0.0f, 0.0f, 0.4f, 0.0f) call:
+Şimdi ana döngüye girebiliriz, ilk olarak ekranı temizleyelim. Bu önceki glClearColor(0.0f, 0.0f, 0.4f, 0.0f) çağrısı nedeniyle arka plan rengini koyu maviye dönüştürür :
 
 ``` cpp
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 ```
 
-and then tell OpenGL that you want to use your shader:
+ve sonra OpenGL'e shaderı kullanmak istediğinizi söyleyin:
 
 ``` cpp
-// Use our shader
+// Shaderımızı kullanın
 glUseProgram(programID);
-// Draw triangle...
+// Üçgen çizin...
 ```
 
-... and presto, here's your red triangle !
+... ve işte kırmızı üçgen!
 
 ![red_triangle]({{site.baseurl}}/assets/images/tuto-2-first-triangle/red_triangle.png){: height="231px" width="300px"}
 
-In the next tutorial we'll learn transformations : How to setup your camera, move your objects, etc.
+Bir sonraki eğitimde dönüşümleri öğreneceğiz: Kameranızı nasıl kurarsınız, nesnelerinizi nasıl hareket ettirirsiniz vb.
