@@ -2,7 +2,7 @@
 layout: tutorial
 status: publish
 published: true
-title: 'Tutorial 3 : Matrices'
+title: 'Eğitim 3 : Matrisler'
 date: '2011-04-09 20:59:15 +0200'
 date_gmt: '2011-04-09 20:59:15 +0200'
 categories: [tuto]
@@ -13,47 +13,47 @@ tags: []
 * TOC
 {:toc}
 
-> _The engines don't move the ship at all. The ship stays where it is and the engines move the universe around it._
+> _Motorlar gemiyi hiç hareket ettirmiyor. Gemi, bulunduğu yerde kalır ve motorlar etraftaki evreni hareket ettirir_
 > 
 > Futurama
 
-**This is the single most important tutorial of the whole set. Be sure to read it at least eight times.**
+**Bu tüm eğitimin en önemli eğitimi, En az sekiz kez okuduğunuzdan emin olun.**
 
-# Homogeneous coordinates
+# Homojen koordinatlar
 
-Until then, we only considered 3D vertices as a (x,y,z) triplet. Let's introduce w. We will now have (x,y,z,w) vectors.
+Şimdiye kadar, 3D verticesleri (x,y,z) olarak düşündük. Bundan sonra (x,y,z,w) olarak düşüneceğiz.
 
-This will be more clear soon, but for now, just remember this :
+Sonra daha iyi anlaşılacak, fakat şimdilik bu şekilde hatırlayalım:
 
-- If w == 1, then the vector (x,y,z,1) is a position in space.
-- If w == 0, then the vector (x,y,z,0) is a direction.
+- Eğer w == 1 ise, vector (x,y,z,1) uzayda bir konumdur.
+- Eğer w == 0, vector (x,y,z,0) bir yönlendirmedir.
 
-(In fact, remember this forever.)
+(Aslında, bunu hep hatırla)
 
-What difference does this make ? Well, for a rotation, it doesn't change anything. When you rotate a point or a direction, you get the same result. However, for a translation (when you move the point in a certain direction), things are different. What could mean "translate a direction" ? Not much.
+Bu ne fark eder? Bir rotasyon için, hiç bir şey değişmez.Bir noktayı veya bir yönü döndürdüğünüzde, aynı sonucu alırsınız. Ancak çeviri için(noktayı belli bir yönde hareket ettirdiğinizde), işler farklıdır. "Bir yönü tercüme etmek" ne demek olabilir. Fazla değil.
 
-Homogeneous coordinates allow us to use a single mathematical formula to deal with these two cases.
+Homojen koordinatlar, bu iki durumla başa çıkmak için tek bir matematiksel formül kullanmamıza izin verir.
 
-# Transformation matrices
+# Dönüşüm matrisleri
 
 
-## An introduction to matrices
+## Matrislere giriş
 
-Simply put, a matrix is an array of numbers with a predefined number of rows and colums. For instance, a 2x3 matrix can look like this :
+Basitçe söylemek gerekirse, bir matris, önceden tanımlanmış sayıda satır ve sütun içeren bir sayı dizisidir. Örnek verirsek, bir 2x3 matris şöyle görünür:
 
 ![]({{site.baseurl}}/assets/images/tuto-3-matrix/2X3.png)
 
-In 3D graphics we will mostly use 4x4 matrices. They will allow us to transform our (x,y,z,w) vertices. This is done by multiplying the vertex with the matrix :
+3B graiklerde çoğunlukla 4x4 matris kullanacağız. (x,y,z,w) vertices olarak dönüştürmemizi sağlayacaktır. Bu işlem matrisi matrisle çarparak yapılır:
 
-**Matrix x Vertex (in this order !!) = TransformedVertex**
+**Matris x Vertex (Bu sırayla !!) = DönüştürülmüşKöşeler**
 
 ![]({{site.baseurl}}/assets/images/tuto-3-matrix/MatrixXVect.gif)
 
-This isn't as scary as it looks. Put your left finger on the a, and your right finger on the x. This is _ax_. Move your left finger to the next number (b), and your right finger to the next number (y). You've got _by_. Once again : _cz_. Once again : _dw_. ax + by + cz + dw. You've got your new x ! Do the same for each line, and you'll get your new (x,y,z,w) vector.
+Göründüğü kadar korkutucu değil. Sol parmağını a ve sağ parmağını x üzerine koy. Bu _ax_. Sol parmağınızı bir sonraki sayıya (b) ve sağ parmağınızı bir sonraki sayıya (y) getirin. _by_ var. Bir kez daha: _cz_. Bir kez daha: _dw_. ax + by + cz + dw. Yeni x'ini aldın! Her satır için de aynısını yapın ve yeni (x, y, z, w) vektörünü elde edersiniz.
 
-Now this is quite boring to compute, an we will do this often, so let's ask the computer to do it instead.
+Şimdi bu işlem oldukça sıkıcı oluyor, bunu sık sık yapacağız, o yüzden bilgisayarlardan bunun yerine bunu yapmasını isteyelim.
 
-**In C++, with GLM:**
+**C++ içinde GLM: ile**
 
 ``` cpp
 glm::mat4 myMatrix;
@@ -62,7 +62,7 @@ glm::vec4 myVector;
 glm::vec4 transformedVector = myMatrix * myVector; // Again, in this order ! this is important.
 ```
 
-**In GLSL :**
+**GLSL içinde :**
 
 ``` glsl
 mat4 myMatrix;
@@ -72,23 +72,23 @@ vec4 transformedVector = myMatrix * myVector; // Yeah, it's pretty much the same
 ```
 {: .highlightglslvs }
 
-( have you cut'n pasted this in your code ? go on, try it)
+( Henüz bu kodu kendi koduna kopyalayıp yapıştırmadın mı? Dene.)
 
-## Translation matrices
+## Dönüşüm matrisleri
 
-These are the most simple tranformation matrices to understand. A translation matrix look like this :
+Bunlar anlaşılması en basit dönüşüm matrisleridir. Bu dönüşüm matrisi buna benziyor :
 
 ![]({{site.baseurl}}/assets/images/tuto-3-matrix/translationMatrix.png)
 
-where X,Y,Z are the values that you want to add to your position.
+X,Y,Z, konumunuza eklemek istediğiniz yerlerdir.
 
-So if we want to translate the vector (10,10,10,1) of 10 units in the X direction, we get :
+Yani X yönünde 10 birimden oluşan vektörü (10,10,10,1) çevirmek istiyorsak : 
 
 ![]({{site.baseurl}}/assets/images/tuto-3-matrix/translationExamplePosition1.png)
 
-(do it ! doooooo it)
+(Durma Yap)
 
-... and we get a (20,10,10,1) homogeneous vector ! Remember, the 1 means that it is a position, not a direction. So our transformation didn't change the fact that we were dealing with a position, which is good.
+... ve (20,10,10,1) homojen bir vektör elde ederiz ! Unutmayın, 1, bir yön değil, bir pozisyon olduğu anlamına gelir. Yani bizim dönüşümümüz, iyi bir pozisyonla uğraştığımız gerçeğini değiştirmedi.
 
 Let's now see what happens to a vector that represents a direction towards the -z axis : (0,0,-1,0)
 
