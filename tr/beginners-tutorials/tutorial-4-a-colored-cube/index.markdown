@@ -13,16 +13,16 @@ tags: []
 * TOC
 {:toc}
 
-Welcome for the 4rth tutorial ! You will do the following :
+4. Eğitimimize hoşgeldin! Aşağıdakileri yapacaksın :
 
-* Draw a cube instead of the boring triangle
-* Add some fancy colors
-* Learn what the Z-Buffer is
+* Sıkıcı üçgen yerine bir Küp çizeceğiz.
+* Süslü renkler ekleyeceğiz.
+* Z-Buffer' ın ne olduğunu öğreneceğiz.
 
 
-# Draw a cube
+# Küp Çizimi
 
-A cube has six square faces. Since OpenGL only knows about triangles, we'll have to draw 12 triangles : two for each face. We just define our vertices in the same way as we did for the triangle.
+Bir küpün 6 tane yüzeyi vardır. OpenGL sadece üçgenleri bildiğinden dolayı 12 adet üçgen çizeceğiz. Her bir yüzey için 2 tane. Köşlerimizi üçgende yaptığımız gibi tanımlarız.
 
 ``` cpp
 // Our vertices. Three consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
@@ -67,21 +67,21 @@ static const GLfloat g_vertex_buffer_data[] = {
 };
 ```
 
-The OpenGL buffer is created, bound, filled and configured with the standard functions (glGenBuffers, glBindBuffer, glBufferData, glVertexAttribPointer) ; see Tutorial 2 for a quick reminder. The draw call does not change either, you just have to set the right number of vertices that must be drawn :
+OpenGL buffer'ı stantart fonksiyonlarla (glGenBuffers, glBindBuffer, glBufferData, glVertexAttribPointer) oluşturuldu, bağlandı ve konfigüre edildi. Hızlıca hatırlamak için Eğitim 2'ye göz atın. Draw Call da değişmez, yalnızca çizilmesi gereken doğru köşe sayısını ayarlamamız gerekir :
 
 ``` cpp
-// Draw the triangle !
+// Üçgen Çizimi !
 glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles -> 6 squares
 ```
 
-A few remarks on this code :
+Bu kod hakkında bir kaç açıklama :
 
-* For now, our 3D model is fixed : in order to change it, you have to modify the source code, recompile the application, and hope for the best. We'll learn how to load dynamic models in tutorial 7.
-* Each vertex is actually written at least 3 times (search "-1.0f,-1.0f,-1.0f" in the code above). This is an awful waste of memory. We'll learn how to deal with this in tutorial 9.
+* Şimdiye kadar 3D modelimiz sabittir, değiştirmek için kaynak kodunu değiştirmeniz, uygulamayı derlemeniz ve çalışır hale getirmeniz gerekir. 7. Eğitimde dinamik modellerin nasıl yükleneceğini öğreneceğiz.
+* Her vertex en az 3 defa yazılmaktadır("-1.0f,-1.0f,-1.0f" yukarıdaki kodda görebilirsinizin). Bu ciddi bir hafıza tüketimi oluşturur. 9. Eğitimde bu konu ile nasıl başa çıkacağımızı öğreneceğiz.
 
-You now have all the needed pieces to draw the cube in white. Make the shaders work ! go on, at least try :)
+Artık küpü beyaz bir zemine çizmemiz için bütün parçalara sahibiz. Shaderları çalıştır, devam et, en azından dene :)
 
-# Adding colors
+# Renklerin eklenmesi
 
 A color is, conceptually, exactly the same as a position : it's just data. In OpenGL terms, they are "attributes". As a matter of fact, we already used this with glEnableVertexAttribArray() and glVertexAttribPointer(). Let's add another attribute. The code is going to be very similar.
 
